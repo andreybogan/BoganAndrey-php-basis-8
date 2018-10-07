@@ -21,6 +21,21 @@
     </a>
   <?php endforeach; ?>
 
+<h2>Фотографии товара</h2>
+
+<!--  // Если при загрузке файла возникли ошибки, выводим их.-->
+<!--  if (!empty($error)) {-->
+<!--  echo "<p style='color:red;'>{$error}</p>";-->
+<!--  }-->
+<!--  ?>-->
+
+  <!-- Форма добавления нового фото -->
+  <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST" enctype="multipart/form-data" style="margin: 24px 0;">
+    <input type="hidden" name="id_prod" value="<?= $arrProduct['id_prod'] ?>">
+    <input type="file" name="file">
+    <input type="submit" name="uploadPhoto" value="Добавить фото">
+  </form>
+
 <?php else: ?>
   <p>Эту страницу могу просматривать только зарегистрированные пользователи.</p>
 <?php endif; ?>
