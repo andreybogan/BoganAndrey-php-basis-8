@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 06 2018 г., 21:46
+-- Время создания: Окт 07 2018 г., 08:17
 -- Версия сервера: 5.7.23
 -- Версия PHP: 7.2.10
 
@@ -44,17 +44,20 @@ CREATE TABLE `catalog` (
   `id_prod` tinyint(3) UNSIGNED NOT NULL,
   `name` varchar(128) NOT NULL,
   `text` text NOT NULL,
-  `price` smallint(6) NOT NULL
+  `price` smallint(6) NOT NULL,
+  `img` varchar(64) DEFAULT NULL,
+  `hide` enum('see','hide') NOT NULL DEFAULT 'see'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `catalog`
 --
 
-INSERT INTO `catalog` (`id_prod`, `name`, `text`, `price`) VALUES
-(1, 'Портмоне для документов', 'Отличный портмоне для мужчин. Стильный и практичный. Подойдёт для каждодневного использования. Имеет скрытые магнитные застежки.', 1500),
-(2, 'Коробочка для денег \"Travel\"', 'Коробочка для денежного подарка \"Travel\" с открыткой.\r\nОтличная упаковка для денежного подарка!\r\nВас пригласили на свадьбу, день рождения, юбилей, и вы хотите красиво подарить денежные средства, на долгожданное путешествие.\r\nДанная коробочка отличная и оригинальная упаковка для вашего подарка!', 750),
-(3, 'Органайзер для детских документов', 'Надоело искать документы по всему дому? Носите их в файлике с кнопочкой? В нужный момент перебираете кучу, чтобы найти свидетельство? Забудьте все эти проблемы! В этом органайзере все по местам.', 2300);
+INSERT INTO `catalog` (`id_prod`, `name`, `text`, `price`, `img`, `hide`) VALUES
+(1, 'Портмоне для документов', 'Отличный портмоне для мужчин. Стильный и практичный. Подойдёт для каждодневного использования. Имеет скрытые магнитные застежки.', 1500, '1-1.jpg', 'see'),
+(2, 'Коробочка для денег', 'Коробочка для денежного подарка \"Travel\" с открыткой.\r\nОтличная упаковка для денежного подарка!\r\nВас пригласили на свадьбу, день рождения, юбилей, и вы хотите красиво подарить денежные средства, на долгожданное путешествие.\r\nДанная коробочка отличная и оригинальная упаковка для вашего подарка!', 750, '2-1.jpg', 'see'),
+(3, 'Органайзер для детских документов', 'Надоело искать документы по всему дому? Носите их в файлике с кнопочкой? В нужный момент перебираете кучу, чтобы найти свидетельство? Забудьте все эти проблемы! В этом органайзере все по местам.', 2300, '3-1.jpg', 'see'),
+(4, 'Удивительные фотографии птиц', 'Это одни из самых удивительных фотографий известного во всем мире фотографа Неизвестного Ивана.', 350, NULL, 'see');
 
 -- --------------------------------------------------------
 
@@ -98,6 +101,13 @@ CREATE TABLE `orders` (
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `orders`
+--
+
+INSERT INTO `orders` (`id_order`, `id_user`, `date`, `address`, `status`, `total`) VALUES
+(1, 7, 1538886603, 'Самара', 'cancelled', 12100);
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +121,15 @@ CREATE TABLE `order_items` (
   `quantity` tinyint(3) UNSIGNED NOT NULL,
   `name` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `order_items`
+--
+
+INSERT INTO `order_items` (`id_order`, `id_prod`, `item_price`, `quantity`, `name`) VALUES
+(1, 1, 1500, 1, 'Портмоне для документов'),
+(1, 2, 750, 8, 'Коробочка для денег'),
+(1, 3, 2300, 2, 'Органайзер для детских документов');
 
 -- --------------------------------------------------------
 
@@ -183,7 +202,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `catalog`
 --
 ALTER TABLE `catalog`
-  MODIFY `id_prod` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_prod` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `catalog_img`
@@ -195,7 +214,7 @@ ALTER TABLE `catalog_img`
 -- AUTO_INCREMENT для таблицы `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id_order` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_order` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `user`

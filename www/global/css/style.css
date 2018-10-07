@@ -86,3 +86,14 @@ footer {
     margin: 24px 0;
     padding: 12px;
 }
+
+.plug {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #cdcdcd;
+    font-weight: bold;
+    color: gray;
+}

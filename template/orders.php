@@ -27,27 +27,3 @@
 <?php else: ?>
   <p>Эту страницу могу просматривать только зарегистрированные пользователи.</p>
 <?php endif; ?>
-
-<script>
-  "use strict";
-
-  $(function () {
-    $('.cancelled').on('click', 'button', function () {
-      let id_order = $(this).parent('li').data('id_order');
-      $.ajax({
-        url: "/orders/change_status",
-        type: 'post',
-        data: {
-          id_order: id_order
-        },
-        success: (result) => {
-          result = JSON.parse(result);
-          if (result.success == 'ok') {
-            $(this).parent('li').find('.status').html(result.message);
-            $(this).parent('li').find('button').remove();
-          }
-        }
-      });
-    });
-  });
-</script>

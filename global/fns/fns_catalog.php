@@ -5,10 +5,7 @@
  */
 function getCatalog() {
   // Извлекаем данные из двух таблиц с использованием подзапросов.
-  $conn =
-    my_query("select catalog.id_prod, catalog.name, catalog.price, catalog_img.img from catalog, catalog_img 
-              where catalog_img.img = 
-              (select catalog_img.img from catalog_img where catalog_img.id_prod = catalog.id_prod limit 1)");
+  $conn = my_query("select id_prod, name, price, img, hide from catalog where hide = 'see'");
   // Получаем ассоциативный массив комментариев и возвращаем его.
   return mysqli_fetch_all($conn, MYSQLI_ASSOC);
 }

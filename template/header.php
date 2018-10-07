@@ -19,6 +19,10 @@
         <button>Заказы</button>
       </a>
 
+      <a href="http://<?= $_SERVER['HTTP_HOST'] ?>/admin" class="link_button">
+        <button>Админка</button>
+      </a>
+
       <form action="<?= $_SERVER['REQUEST_URI'] ?>" method="post" style="display: inline-block;">
         <input type="submit" name="logout" value="Выйти" style="width: auto;">
       </form>

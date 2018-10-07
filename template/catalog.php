@@ -5,7 +5,11 @@
   <?php foreach ($arrCatalog as $value): ?>
     <div class="item">
       <a href="catalog/catalog_one/<?= $value['id_prod'] ?>">
-        <img src="./images/small/<?= $value['img'] ?>" alt="">
+        <?php if ($value['img'] != ''): ?>
+          <img src="./images/small/<?= $value['img'] ?>" alt="">
+        <?php else: ?>
+          <div class="plug">Фото отсутствует</div>
+        <?php endif; ?>
       </a>
       <a href="catalog/catalog_one/<?= $value['id_prod'] ?>">
         <p><?= $value['name'] ?></p>
